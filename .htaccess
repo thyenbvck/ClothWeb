@@ -1,5 +1,5 @@
 # ── Security ──────────────────────────────────────────────
-Options -Indexes                        # hide directory listings
+Options -Indexes
 ServerSignature Off
 
 # Block direct access to sensitive files
@@ -35,3 +35,4 @@ ServerSignature Off
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript
 </IfModule>
+

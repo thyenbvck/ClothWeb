@@ -5,7 +5,9 @@ FROM php:8.2-apache
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 # ── Apache modules ─────────────────────────────────────────
-RUN a2enmod rewrite deflate expires headers
+# Disable conflicting MPMs, keep only prefork (required for mod_php)
+RUN a2dismod mpm_event mpm_worker 2>/dev/null || true \
+    && a2enmod mpm_prefork rewrite deflate expires headers
 
 # ── Allow .htaccess overrides ──────────────────────────────
 RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf

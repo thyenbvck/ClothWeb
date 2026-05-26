@@ -1,21 +1,79 @@
 body {
     font-family: 'Arial', sans-serif;
 }
+
 .about-section {
     background-color: #f8f9fa;
-    padding: 50px 0;
+    padding: 60px 0;
 }
+
+/* Section headings */
+.about-section h2 {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.about-section h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #fe4231;
+    margin: 10px auto 0;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+
+.about-section h2:hover::after {
+    width: 90px;
+}
+
+/* Team member cards */
+.team-member {
+    text-align: center;
+    padding: 20px 10px;
+    border-radius: 10px;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-member:hover {
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
 .team-member img {
     border-radius: 50%;
     width: 150px;
     height: 150px;
     object-fit: cover;
-    transition: transform 0.3s ease-in-out;
+    border: 3px solid transparent;
+    transition: transform 0.35s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
-.team-member img:hover {
-    transform: scale(1.1);
+
+.team-member:hover img {
+    transform: scale(1.08);
+    border-color: #fe4231;
+    box-shadow: 0 6px 18px rgba(254, 66, 49, 0.3);
 }
+
+.team-member h5 {
+    margin-top: 12px;
+    font-weight: 700;
+    transition: color 0.25s ease;
+}
+
+.team-member:hover h5 {
+    color: #fe4231;
+}
+
+/* Core values icons */
 .core-values i {
-    font-size: 2rem;
-    color: #007bff;
+    font-size: 2.2rem;
+    color: #fe4231;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.core-values .col-md-4:hover i {
+    transform: scale(1.2) rotate(-8deg);
+    color: #d93a28;
 }

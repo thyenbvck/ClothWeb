@@ -1,36 +1,92 @@
 .contact-section {
     background-color: #f8f9fa;
-    padding: 50px 0;
+    padding: 60px 0;
 }
-.form-control, .btn {
-    border-radius: 0;
+
+.contact-section h2 {
+    position: relative;
+    margin-bottom: 16px;
 }
+
+.contact-section h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #fe4231;
+    margin: 10px 0 0;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+
+.contact-section h2:hover::after {
+    width: 80px;
+}
+
+/* Form inputs */
+.form-control {
+    border-radius: 5px !important;
+    border: 1px solid #ddd;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.form-control:focus {
+    border-color: #fe4231 !important;
+    box-shadow: 0 0 0 3px rgba(254, 66, 49, 0.15) !important;
+    outline: none;
+}
+
+/* Contact detail links */
 .contact-details {
     font-size: 16px;
 }
+
+.contact-details li {
+    margin-bottom: 8px;
+    transition: padding-left 0.2s ease;
+}
+
+.contact-details li:hover {
+    padding-left: 4px;
+}
+
 .contact-details li a {
     color: #000;
     text-decoration: none;
-    transition: color 0.3s ease-in-out;
+    transition: color 0.25s ease;
 }
+
 .contact-details li a:hover {
-    color: #007bff;
+    color: #fe4231;
 }
-.btn {
-    transition: background-color 0.3s ease, transform 0.2s ease;
+
+/* Submit button */
+.btn-submit-contact {
+    transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease !important;
 }
-.btn:hover {
-    background-color: #343a40;
-    transform: scale(1.05);
+
+.btn-submit-contact:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2) !important;
 }
+
+/* Map container */
 .map-container {
     margin-top: 20px;
     border: 2px solid #ddd;
     overflow: hidden;
     border-radius: 10px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
+
+.map-container:hover {
+    border-color: #fe4231;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
 iframe {
     width: 100%;
     height: 300px;
     border: none;
+    display: block;
 }

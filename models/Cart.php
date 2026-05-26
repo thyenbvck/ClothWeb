@@ -72,14 +72,14 @@ class Cart {
     public static function getCartByUsername($username) {
         $db = DB::getInstance();
         $user = User::getUserByUsername($username);
+        $user_id = $user->getUserId();          // store in variable — bind_param needs a reference
         $stmt = $db->prepare('SELECT * FROM cart WHERE user_id = ?');
-        $stmt->bind_param('i', $user->getUserId());
+        $stmt->bind_param('i', $user_id);
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
-            $result = $result->fetch_assoc();
-            $cart = new Cart($result['cart_id'], $result['user_id'], $result['created_at']);
-            return $cart;
+            $row  = $result->fetch_assoc();
+            return new Cart($row['cart_id'], $row['user_id'], $row['created_at']);
         }
         return null;
     }
@@ -87,17 +87,11 @@ class Cart {
     // create cart
     public static function createCart($username) {
         $db = DB::getInstance();
-        $user = User::getUserByUsername($username);
+        $user    = User::getUserByUsername($username);
         $user_id = $user->getUserId();
         $stmt = $db->prepare('INSERT INTO cart (user_id) VALUES (?)');
         $stmt->bind_param('i', $user_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if ($result) {
-            return true;
-        } else {
-            return false;
-        }
+        return $stmt->execute();                // execute() returns bool for INSERT
     }
 }
 ?>

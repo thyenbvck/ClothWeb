@@ -2,15 +2,23 @@
 class DB
 {
     public static $instance = NULL;
-    public static function getInstance() 
+    public static function getInstance()
     {
-        if (!isset(self::$instance)) 
+        if (!isset(self::$instance))
         {
-            self::$instance = mysqli_connect("localhost", "root", "root", "assignWeb");
+            // Reads from environment variables when deployed (Railway, Render, cPanel, etc.)
+            // Falls back to local XAMPP defaults automatically
+            $host = getenv('DB_HOST') ?: 'localhost';
+            $user = getenv('DB_USER') ?: 'root';
+            $pass = getenv('DB_PASS') ?: '';
+            $name = getenv('DB_NAME') ?: 'lastdatabaseweb';
+
+            self::$instance = mysqli_connect($host, $user, $pass, $name);
             if (mysqli_connect_error())
             {
                 die("Failed to connect to MySQL: " . mysqli_connect_error());
             }
+            mysqli_set_charset(self::$instance, 'utf8mb4');
         }
         return self::$instance;
     }

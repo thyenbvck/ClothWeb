@@ -5,8 +5,11 @@ FROM php:8.2-apache
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 # ── Apache modules ─────────────────────────────────────────
-# Disable conflicting MPMs, keep only prefork (required for mod_php)
-RUN a2dismod mpm_event mpm_worker 2>/dev/null || true \
+# Remove conflicting MPM symlinks directly, keep only prefork
+RUN rm -f /etc/apache2/mods-enabled/mpm_event.conf \
+          /etc/apache2/mods-enabled/mpm_event.load \
+          /etc/apache2/mods-enabled/mpm_worker.conf \
+          /etc/apache2/mods-enabled/mpm_worker.load \
     && a2enmod mpm_prefork rewrite deflate expires headers
 
 # ── Allow .htaccess overrides ──────────────────────────────

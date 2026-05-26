@@ -4,8 +4,7 @@ ServerSignature Off
 
 # Block direct access to sensitive files
 <FilesMatch "\.(sql|log|env|md|gitignore)$">
-    Order Allow,Deny
-    Deny from all
+    Require all denied
 </FilesMatch>
 
 # ── Route everything through index.php ────────────────────

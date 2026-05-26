@@ -9,7 +9,7 @@ class NewsController extends BaseController
     }
     public function index()
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) { session_start(); }
         $newslist = News::getAll();
         $data = array('newses' => $newslist);
         $this->render('index', $data);

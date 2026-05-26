@@ -13,7 +13,7 @@ class ProductsController extends BaseController
     }
     public function index()
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) { session_start(); }
         if (isset($_GET['cat_id'])) {
 
             $products = Product::getProductsByCategoryId(intval($_GET['cat_id']));
@@ -35,7 +35,7 @@ class ProductsController extends BaseController
 
     public function viewdetail()
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) { session_start(); }
         $products = Product::getAll();
         $p_cat = Category::getAll();
         $category = Product::getcate(intval($_GET['id']));
@@ -52,7 +52,7 @@ class ProductsController extends BaseController
     }
 
     public function addtocart(){
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) { session_start(); }
         if(!isset($_SESSION['username'])){
             echo json_encode(array('status' => 401, 'message' => 'Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng'));
         }else{

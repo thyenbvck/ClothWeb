@@ -10,7 +10,7 @@ class ContactController extends BaseController{
 
     public function index()
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) { session_start(); }
         $data = array();
         $this->render("index", $data);
     }

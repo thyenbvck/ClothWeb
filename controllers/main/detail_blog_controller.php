@@ -15,7 +15,7 @@ class Detail_blogController extends BaseController
 
 	public function index()
 	{
-		session_start();
+		if (session_status() === PHP_SESSION_NONE) { session_start(); }
         $news_id = intval($_GET['id']);
         $news = News::getNewsById($news_id);
         $comments = Comment::getCommentsByNewsId($news_id);
@@ -37,7 +37,7 @@ class Detail_blogController extends BaseController
 
 	public function comment()
 	{
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) { session_start(); }
         if(!isset($_SESSION['username'])){
             Header('Location: index.php?page=main&controller=login&action=index');
             exit();

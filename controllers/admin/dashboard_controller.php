@@ -11,7 +11,7 @@ class DashboardController extends BaseController
   }
   public function index()
   {
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) { session_start(); }
     $data = array();
     $totalUser = User::countAllUser();
     $totalProduct = Product::countAllProducts();

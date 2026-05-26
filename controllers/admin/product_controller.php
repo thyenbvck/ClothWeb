@@ -12,7 +12,7 @@ class ProductController extends BaseController
     
     public function index()
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) { session_start(); }
         $products = Product::getAll();
         $categories = Category::getAll();
         $data = array('products' => $products, 'categories' => $categories);

@@ -7,7 +7,7 @@ class AboutController extends BaseController
 {
     function __construct()
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) { session_start(); }
         $this->folder = "about";
     }
     public function index()

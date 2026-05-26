@@ -15,7 +15,7 @@ class RegisterController extends BaseController
 
 	public function submit()
 	{
-		session_start();
+		if (session_status() === PHP_SESSION_NONE) { session_start(); }
 		$username = $_POST['username'];
 		$pass = $_POST['pass'];
 		$email = $_POST['email'];

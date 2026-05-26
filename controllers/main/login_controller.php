@@ -10,7 +10,7 @@ class LoginController extends BaseController
 
 	public function index()
 	{
-		session_start();
+		if (session_status() === PHP_SESSION_NONE) { session_start(); }
 		if (!isset($_SESSION['username']) &&  !isset($_SESSION['role_id']) && isset($_COOKIE['username']) && isset($_COOKIE['role_id'])){
 			echo "string";
 			// Tự động đăng nhập
@@ -63,7 +63,7 @@ class LoginController extends BaseController
 
 	public function logout()
 	{
-		session_start();
+		if (session_status() === PHP_SESSION_NONE) { session_start(); }
 		unset($_SESSION['username']);
 		unset($_SESSION['role_id']);
 		session_destroy();

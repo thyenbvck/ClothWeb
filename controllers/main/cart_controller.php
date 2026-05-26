@@ -15,13 +15,13 @@ class CartController extends BaseController
 
     public function index()
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) { session_start(); }
         $data = array();
         $this->render("index", $data);
     }
 
     public function deleteItem(){
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) { session_start(); }
         $res = CartItem::deleteCartItemById(intval($_GET['id']));
         if($res){
             $cart = Cart::getCartByUsername($_SESSION['username']);
@@ -45,13 +45,13 @@ class CartController extends BaseController
     }
 
     public function payment(){
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) { session_start(); }
         $data = array();
         $this->render("payment", $data);
     }
 
     public function makepayment(){
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) { session_start(); }
         if(isset($_POST['paymentMethod']) && $_POST['paymentMethod']=='2'){
             // Cấu hình từ VNPay Sandbox
             $vnp_TmnCode = "M1K8IF92"; // Mã TMN từ VNPay
@@ -127,7 +127,7 @@ class CartController extends BaseController
     }
 
     public function vnpay_return(){
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) { session_start(); }
         $vnp_TmnCode = "M1K8IF92"; // Mã TMN từ VNPay
         $vnp_HashSecret = "BW8ZE1YP4ZAKCE1QAHEWS9INRYAE7Z71"; // Secret Key từ VNPay
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html"; // URL thanh toán Sandbox

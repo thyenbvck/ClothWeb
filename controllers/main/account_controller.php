@@ -14,7 +14,7 @@ class AccountController extends BaseController {
     }
     public function index()
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) { session_start(); }
         if(isset($_SESSION['username']) && isset($_SESSION['role_id'])) {
             // get user by username
             $user = User::getUserByUsername($_SESSION['username']);
